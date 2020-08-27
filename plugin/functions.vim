@@ -35,11 +35,11 @@ function! VimwikiLinkHandler(link)  "{{{ Use Vim to open links with special sche
     return TwWslHandler(link)
   endif
 
+  call TwDebug("VimwikiLinkHandler: Passing through to default handler")
   return 0
-
 endfunction
 
 " highlight the prefixes (containedin=cComment,vimLineComment)
-autocmd Syntax * syntax keyword twLink win qnr sfm1 coco containedin=ALL
-highlight link twLink Keyword
+"TODO autocmd Syntax * syntax keyword twLink win qnr sfm1 coco containedin=ALL
+"highlight link twLink Keyword
 " }}}

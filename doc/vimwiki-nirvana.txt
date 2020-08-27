@@ -33,9 +33,13 @@ Special characters in the prefix (e.g. $) have to be escaped.
 WLS support:
 No configuration required for normal HTTP links: When
 *vimwiki-nirvana* detects WLS, it automatically sets `explorer.exe` as your
+<<<<<<< HEAD
 default program launcher for schema `http|https` and `file:/mnt/c`. To this
 end *vimwiki-nirvana* changes the path `file:/mnt/<drive_letter>/a/b/` to
 `<drive_letter>:/a/b`. This allows `explorer.exe` to open the path with the registered Windows application.
+=======
+default program launcher for schema `http|https`.
+>>>>>>> fe05cfdfe1d646509755b5df1593465032008f5f
 
 To open arbitrary files a little more work is required. After all WLS work on Linux
 paths whereas `explorer.exe` expects paths in the form of `C:/bla/blub`.
