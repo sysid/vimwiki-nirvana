@@ -1,0 +1,9 @@
+# Test my functions
+Execute (test VimwikiLinkHandler):
+  let file = 'file:/mnt/c/Users/Thomas/OneDrive/My Documents/xxx.docx'
+  Log file
+  Assert VimwikiLinkHandler(file), "Link is not valid"
+
+  "let file = 'win_d:/mnt/d/Users/Thomas/OneDrive/INVALID/xxx.docx'
+  "Log file
+  "Assert VimwikiLinkHandler(file) == 0, "Link is valid"

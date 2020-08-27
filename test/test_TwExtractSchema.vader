@@ -1,0 +1,37 @@
+Before (set globals: handler config):
+  let g:twvim_handlers = {
+        \ 'xxxxxx': {'prefix': 'smb://xxx/aaa', 'replacement': '/Volumes/xxx', 'executable': 'explorer.exe'},
+        \ 'wsl': {'prefix': '/mnt/d', 'replacement': 'D:', 'executable': 'explorer.exe'},
+        \ 'twschema': {'prefix': 'smb://yyy', 'replacement': '/Volumes/yyy'},
+  \ }
+  for v in keys(g:twvim_handlers)
+   echom"Defined handlers: " . v
+  endfor
+
+Execute (TwExtractSchema: valid):
+  let file = "wsl::/mnt/d/xxx.docx"
+  Log file
+  Assert TwExtractSchema(file) == 'wsl'
+
+  let file = "xxxxxx::/mnt/d/xxx.docx"
+  Log file
+  Assert TwExtractSchema(file) == 'xxxxxx'
+
+Execute (TwExtractSchema: invalid):
+  let file = "xxxxxxy::/mnt/d/xxx.docx"
+  Log file
+  Assert TwExtractSchema(file) == ''
+
+Execute (TwExtractSchema: empty):
+  let file = "/mnt/d/xxx.docx"
+  Log file
+  Assert TwExtractSchema(file) == ''
+
+Execute (TwExtractSchema: http):
+  let file = "http://mnt/d/xxx.docx"
+  Log file
+  Assert TwExtractSchema(file) == ''
+
+  let file = "https://mnt/d/xxx.docx"
+  Log file
+  Assert TwExtractSchema(file) == ''
