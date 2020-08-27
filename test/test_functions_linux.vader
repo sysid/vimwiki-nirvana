@@ -1,0 +1,13 @@
+# Test my functions
+Execute (test TwWslHandler):
+  let link = "https://learnvimscriptthehardway.stevelosh.com/chapters/01.html"
+  Log link
+  let retcode = TwWslHandler(link)
+  echom "retcode:" retcode
+  Assert retcode, "Expect 1, got ".retcode
+
+  let link = "http://learnvimscriptthehardway.stevelosh.com/chapters/02.html"
+  Log link
+  let retcode = TwWslHandler(link)
+  echom "retcode:" retcode
+  Assert retcode, "Expect 1, got ".retcode

@@ -1,0 +1,53 @@
+*vimwiki-nirvana* extension of vimwiki to make it note-taking nivrana
+       _                   _ _    _           _                              ~
+__   _(_)_ __ _____      _(_) | _(_)    _ __ (_)_ ____   ____ _ _ __   __ _  ~
+\ \ / / | '_ ` _ \ \ /\ / / | |/ / |___| '_ \| | '__\ \ / / _` | '_ \ / _` | ~
+ \ V /| | | | | | \ V  V /| |   <| |___| | | | | |   \ V / (_| | | | | (_| | ~
+  \_/ |_|_| |_| |_|\_/\_/ |_|_|\_\_|   |_| |_|_|_|    \_/ \__,_|_| |_|\__,_| ~
+
+==============================================================================
+CONTENTS                                            *vimwiki-nirvana-contents*
+
+    1. Usage ................ |vimwiki-nirvana-usage|
+    2. License .............. |vimwiki-nirvana-license|
+    3. Changelog ............ |vimwiki-nirvana-changelog|
+    4. Credits .............. |vimwiki-nirvana-credits|
+
+==============================================================================
+USAGE                                                  *vimwiki-nirvana-usage*
+This plugin requires https://github.com/xolox/vim-misc in order to establish
+OS detection.
+
+General idea:
+Custom handler are defined via custom schemes. Instead of the default
+`file:/../..` schema you define custom schemes in your `.vimrc`:
+
+let g:twvim_handlers = {
+      \ 'your_schema': {'prefix': 'prefix/path', 'replacement': '/xxx', 'executable': 'program for opening the file'},
+      \ 'home': {'prefix': 'smb://uh01500696.bmwgroup.net/home\$', 'replacement': '/Volumes/xxx'},
+      \ 'win_d': {'prefix': '/mnt/d', 'replacement': 'D:', 'executable': 'explorer.exe'},
+\ }
+
+Special characters in the prefix (e.g. $) have to be escaped.
+
+WLS support:
+No configuration required for normal HTTP links: When
+*vimwiki-nirvana* detects WLS, it automatically sets `explorer.exe` as your
+default program launcher for schema `http|https`.
+
+To open arbitrary files a little more work is required. After all WLS work on Linux
+paths whereas `explorer.exe` expects paths in the form of `C:/bla/blub`.
+
+'Link Translation' solves this problem and also helps to deal
+with remote filesystem paths in general.
+Specifiy a path 'prefix' which will then be replaced by a 'replacement'. The
+resulting path will be fed to the specified executable to open the file.
+If no executable is given, the defaults are used (open, xdg-open, start).
+
+
+LICENSE                                              *vimwiki-nirvana-license*
+==============================================================================
+GNU GENERAL PUBLIC LICENSE
+
+==============================================================================
+vim:tw=78:sw=2:ts=2:ft=help:norl:nowrap:

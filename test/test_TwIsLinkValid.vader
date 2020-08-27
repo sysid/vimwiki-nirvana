@@ -1,0 +1,28 @@
+# Test my functions
+Execute (TwIsLinkValid: no remote mounts, no WLS):
+  let file = 'test_functions.vader'
+  Log printf("valid dir, existing file: %s", file)
+  Assert TwIsLinkValid(file), "Link is not valid"
+
+  let file = '/home'
+  Log printf("valid dir: %s", file)
+  Assert TwIsLinkValid(file), "Directory is not valid"
+
+  let file = "/Volumes/AD-Data/Internal/01 Strategy & Steering/03 Planning & Steering/06 Digitalisation/10_Projekte/PublicCharging/"
+  Log printf("not mounted: %s", file)
+  Assert TwIsLinkValid(file) != 1, "Link is valid"
+
+  let file = "/mnt/d/xxx.docx"
+  Log printf("not existing dir/file: %s", file)
+  Assert TwIsLinkValid(file) != 1, "Link is valid"
+
+  let file = '/mnt/d/Users/Thomas/OneDrive/NOTVALID/xxx.docx'
+  Log printf("not existing dir/file: %s", file)
+  Assert TwIsLinkValid(file) != 1, "Link is valid"
+
+
+" prerequiste: BMW fs mounted
+"Execute (TwIsLinkValid: remote mounts):
+  "let file = "/Volumes/AD-Data/Internal/01 Strategy & Steering/03 Planning & Steering/06 Digitalisation/10_Projekte/PublicCharging/"
+  "Log file
+  "Assert TwIsLinkValid(file), "Directory is not valid"
