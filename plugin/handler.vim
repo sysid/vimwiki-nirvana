@@ -30,7 +30,6 @@ function! TwHandler(link)  "{{{ use not default handler like sdg-open, but speci
   let nlink = substitute(link, toreplace, replacement, "")
   call TwDebug(printf("TwHandler: nlink: %s", nlink))
 
-  let x = TwIsLinkValid(nlink)
   if !TwIsLinkValid(nlink)
     call TwWarn(printf("TwHandler: Invalid or non-existing link: %s", nlink))
     return 2

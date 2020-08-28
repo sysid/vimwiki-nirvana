@@ -30,9 +30,16 @@ function! TwWslHandler(link)  "{{{ use not default handler like sdg-open, but sp
       if drive == "" | return 0 | endif  "fall through to default handler
 
       let nlink = substitute(link, '^file:/mnt/./', drive.':/', "")
-      call TwDebug(printf("TwWslHandler: nlink: %s", nlink))
-
       "let cmd = "!explorer.exe '" . substitute(nlink, "/", "\\\\", 'g') ."'"
+      let cmd = printf("!explorer.exe '%s'", nlink)
+      call TwDebug(printf('TwWslHandler: %s', cmd))
+      return 1
+    elseif link =~? "^file:.:.*"
+      let drive = matchstr(link, '^file:\zs.\ze:.*')
+      call TwDebug(printf("TwWslHandler: drive: %s", drive))
+      if drive == "" | return 0 | endif  "fall through to default handler
+
+      let nlink = substitute(link, '^file:', '', "")
       let cmd = printf("!explorer.exe '%s'", nlink)
       call TwDebug(printf('TwWslHandler: %s', cmd))
       return 1

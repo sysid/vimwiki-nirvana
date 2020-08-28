@@ -13,31 +13,41 @@ Before (set globals: handler config):
   let g:twvim_wsl = 1
   source ~/.vim/bundle/vimwiki-nirvana/plugin/functions_linux.vim
 
-Execute (test TwWslHandler: drive c):
-  let file = 'file:/mnt/c/Users/Thomas/OneDrive/My Documents/xxx.docx'
+Execute (test TwWslHandler: c:\):
+  let file = 'file:c:\Users\Thomas\OneDrive\My Documents\xxx.docx'
   Log file
   Assert TwWslHandler(file), "Invalid drive"
 
-Execute (test TwWslHandler: drive d):
-  let file = 'file:/mnt/d/Users/Thomas/OneDrive/My Documents/xxx.docx'
+Execute (test TwWslHandler: D:\):
+  let file = 'file:D:\Users\Thomas\OneDrive\My Documents\xxx.docx'
   Log file
   Assert TwWslHandler(file), "Invalid drive"
 
-Execute (test TwWslHandler: drive zz):
-  let file = 'file:/mnt/zz/Users/Thomas/OneDrive/My Documents/xxx.docx'
-  Log file
-  Assert ! TwWslHandler(file), "Valid drive, but expected invalid drive."
+"Execute (test TwWslHandler: drive c):
+  "let file = 'file:/mnt/c/Users/Thomas/OneDrive/My Documents/xxx.docx'
+  "Log file
+  "Assert TwWslHandler(file), "Invalid drive"
 
-Execute (test TwWslHandler: https):
-  let link = "https://learnvimscriptthehardway.stevelosh.com/chapters/01.html"
-  Log link
-  let retcode = TwWslHandler(link)
-  echom "retcode:" retcode
-  Assert retcode, "Expect 1, got ".retcode
+"Execute (test TwWslHandler: drive d):
+  "let file = 'file:/mnt/d/Users/Thomas/OneDrive/My Documents/xxx.docx'
+  "Log file
+  "Assert TwWslHandler(file), "Invalid drive"
 
-Execute (test TwWslHandler: http):
-  let link = "http://learnvimscriptthehardway.stevelosh.com/chapters/02.html"
-  Log link
-  let retcode = TwWslHandler(link)
-  echom "retcode:" retcode
-  Assert retcode, "Expect 1, got ".retcode
+"Execute (test TwWslHandler: drive zz):
+  "let file = 'file:/mnt/zz/Users/Thomas/OneDrive/My Documents/xxx.docx'
+  "Log file
+  "Assert ! TwWslHandler(file), "Valid drive, but expected invalid drive."
+
+"Execute (test TwWslHandler: https):
+  "let link = "https://learnvimscriptthehardway.stevelosh.com/chapters/01.html"
+  "Log link
+  "let retcode = TwWslHandler(link)
+  "echom "retcode:" retcode
+  "Assert retcode, "Expect 1, got ".retcode
+
+"Execute (test TwWslHandler: http):
+  "let link = "http://learnvimscriptthehardway.stevelosh.com/chapters/02.html"
+  "Log link
+  "let retcode = TwWslHandler(link)
+  "echom "retcode:" retcode
+  "Assert retcode, "Expect 1, got ".retcode
