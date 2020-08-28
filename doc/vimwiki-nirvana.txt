@@ -11,13 +11,14 @@ CONTENTS                                            *vimwiki-nirvana-contents*
     1. Intro ................ |vimwiki-nirvana-intro|
     2. WSL Support .......... |vimwiki-nirvana-wsl|
     3. Link Translation ..... |vimwiki-nirvana-link-translation|
-    4. License .............. |vimwiki-nirvana-license|
+    4. VIM Integration ...... |vimwiki-nirvana-vim-integration
+    5. License .............. |vimwiki-nirvana-license|
 
 ==============================================================================
 INTRO                                                 *vimwiki-nirvana-intro*
 
 This plugin requires https://github.com/xolox/vim-misc in order to establish
-OS detection.
+OS detection. It is tested on Linux, Mac and WSL.
 
 General idea:
 Vimwiki handles OS native paths very well. However the default behaviour of
@@ -71,6 +72,20 @@ let g:twvim_handlers = {
 Caution:
 - Special characters in the prefix (e.g. $) have to be escaped.
 - the executable has to be in your search PATH
+
+==============================================================================
+VIM INTEGRATION                               *vimwiki-nirvana-vim-integration*
+
+A dedicated schema to open files with VIM in a new tab is available:
+`vim::~/development/xxx.py`.
+
+Use the following config in `.vimrc`:
+
+let g:twvim_handlers = {
+      \ 'vim': {'prefix': '', 'replacement': '', 'executable': 'vim'},
+\ }
+
+You can use path translation, i.e. specify `prefix, replacement` if needed.
 
 
 LICENSE                                              *vimwiki-nirvana-license*

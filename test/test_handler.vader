@@ -4,43 +4,49 @@ Before (set globals: handler config):
         \ 'xxx': {'prefix': 'smb://xxx/aaa', 'replacement': '/Volumes/xxx', 'executable': 'explorer.exe'},
         \ 'yyy': {'prefix': 'smb://yyy', 'replacement': '/Volumes/yyy'},
         \ 'wsl': {'prefix': '/mnt/d', 'replacement': 'D:', 'executable': 'explorer.exe'},
+        \ 'vim': {'prefix': '', 'replacement': '', 'executable': 'vim'},
         \ 'twschema': {'prefix': 'smb://yyy', 'replacement': '/Volumes/yyy'},
   \ }
   for v in keys(g:twvim_handlers)
    echom"Defined handlers: " . v
   endfor
 
-Execute (test handler):
-  let file = "wsl::/mnt/d/xxx.docx"
-  Log file
-  Assert TwHandler(file)
+Execute (TwHandler: 'vim::$HOME/.vim/bundle/vimwiki-nirvana/LICENSE'):
+  let file = 'vim::$HOME/.vim/bundle/vimwiki-nirvana/LICENSE'
+  Assert TwHandler(file) == 1
 
-Execute (test handler):
-  let file = "qnr::smb://uh01500696.bmwgroup.net/home$"
-  Log file
-  Assert TwHandler(file)
+"Execute (TwHandler: 'vim::~/.vim/bundle/vimwiki-nirvana/LICENSE'):
+  "let file = 'vim::~/.vim/bundle/vimwiki-nirvana/LICENSE'
+  "Assert TwHandler(file) == 1
 
-Execute (test handler):
-  let file = "xxx::smb://xxx/aaa/learnvimscriptthehardway.stevelosh.com/"
-  Log file
-  Assert TwHandler(file)
+"Execute (TwHandler:  "wsl::/mnt/d/xxx.docx"):
+  "let file = "wsl::/mnt/d/xxx.docx"
+  "Assert TwHandler(file)
 
-Execute (test invalid schema, fall back to default handler):
-  let file = "invalid::smb://yyy/tevelosh.com/"
-  Log file
-  Assert TwHandler(file) == 0
+"Execute (TwHandler:  "qnr::smb://uh01500696.bmwgroup.net/home$"):
+  "let file = "qnr::smb://uh01500696.bmwgroup.net/home$"
+  "Assert TwHandler(file)
 
-Execute (test TwExtractSchema: invalid schema):
-  let file = "invalid::smb://yyy/tevelosh.com/"
-  Log file
-  Assert TwExtractSchema(file) == ""
+"Execute (TwHandler:  "xxx::smb://xxx/aaa/learnvimscriptthehardway.stevelosh.com/"):
+  "let file = "xxx::smb://xxx/aaa/learnvimscriptthehardway.stevelosh.com/"
+  "Assert TwHandler(file)
 
-Execute (test TwExtractSchema: xxx):
-  let file = "xxx::smb://yyy/tevelosh.com/"
-  Log file
-  Assert TwExtractSchema(file) == "xxx"
+"Execute (test invalid schema, fall back to default handler):
+  "let file = "invalid::smb://yyy/tevelosh.com/"
+  "Log file
+  "Assert TwHandler(file) == 0
 
-Execute (test TwExtractSchema: twschema):
-  let file = "twschema::smb://yyy/tevelosh.com/"
-  Log file
-  Assert TwExtractSchema(file) == "twschema"
+"Execute (test TwExtractSchema: invalid schema):
+  "let file = "invalid::smb://yyy/tevelosh.com/"
+  "Log file
+  "Assert TwExtractSchema(file) == ""
+
+"Execute (test TwExtractSchema: xxx):
+  "let file = "xxx::smb://yyy/tevelosh.com/"
+  "Log file
+  "Assert TwExtractSchema(file) == "xxx"
+
+"Execute (test TwExtractSchema: twschema):
+  "let file = "twschema::smb://yyy/tevelosh.com/"
+  "Log file
+  "Assert TwExtractSchema(file) == "twschema"

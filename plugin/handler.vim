@@ -27,7 +27,7 @@ function! TwHandler(link)  "{{{ use not default handler like sdg-open, but speci
   let toreplace = schema.'::'.prefix
   call TwDebug(printf("TwHandler: toreplace: %s", toreplace))
 
-  let nlink = substitute(link, toreplace, replacement, "")
+  let nlink = fnamemodify(expand(substitute(link, toreplace, replacement, "")), ':p')
   call TwDebug(printf("TwHandler: nlink: %s", nlink))
 
   if !TwIsLinkValid(nlink)
@@ -36,6 +36,10 @@ function! TwHandler(link)  "{{{ use not default handler like sdg-open, but speci
   endif
 
   if executable != ""
+    if executable =~? 'vim'
+      execute "tabnew" nlink
+      return 1
+    endif
       "let cmd = "!explorer.exe '" . substitute(nlink, "/", "\\\\", 'g') ."'"
       let cmd = printf("!%s %s", executable, nlink)
       call TwDebug(printf("TwHandler: %s", cmd))
