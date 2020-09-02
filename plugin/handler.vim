@@ -51,14 +51,19 @@ function! TwHandler(link)  "{{{ do not use default handler like sdg-open, but sp
       "silent execute cmd
       return 1
     else
-      call TwDebug(printf("TwHandler: calling default open|xdg-open|start: %s", nlink))
+      call TwDebug(printf("TwHandler: calling default open, xdg-open, start: %s", nlink))
       let link_infos = vimwiki#base#resolve_link(nlink)  " no error when remote fs unmounted, resolves relative links
       if link_infos.filename == ''
         call TwWarn("TwHandler: Unable to resolve link ".nlink)
         return 0
       else
         call TwDebug(printf("TwHandler: link_infos: %s", link_infos))
-        call vimwiki#base#system_open_link(link_infos.filename)
+        call TwDebug(printf("TwHandler: calling vimwiki#base#system_open_link('%s')", link_infos.filename))
+
+        "must not use link_infos.filename because path is preceded with vimwiki sourcefile path (base.vim:186)
+        "call vimwiki#base#system_open_link(link_infos.filename)
+        call vimwiki#base#system_open_link(nlink)
+
         return 1
       endif
   endif
