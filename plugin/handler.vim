@@ -2,8 +2,11 @@
 
 if g:twvim_debug | echom "-D- Sourcing " expand('<sfile>:p') | endif
 
-function! TwHandler(link)  "{{{ use not default handler like sdg-open, but specific one
+function! TwHandler(link)  "{{{ do not use default handler like sdg-open, but specific one
   " define one schema per replacment
+  " if replacement cannot be done, original link is returned and tested for existence
+  " return: 2 (if invalid link: no fallback), 0 (fallback to default handler, 1 (success)
+
   let link = a:link
 
   let schema= TwExtractSchema(link)
@@ -27,6 +30,7 @@ function! TwHandler(link)  "{{{ use not default handler like sdg-open, but speci
   let toreplace = schema.'::'.prefix
   call TwDebug(printf("TwHandler: toreplace: %s", toreplace))
 
+  " TODO: in case no replacment possible: better user feedback
   let nlink = fnamemodify(expand(substitute(link, toreplace, replacement, "")), ':p')
   call TwDebug(printf("TwHandler: nlink: %s", nlink))
 
