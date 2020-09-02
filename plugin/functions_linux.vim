@@ -6,8 +6,7 @@ endif
 if g:twvim_debug | echom "-D- Sourcing " expand('<sfile>:p') | endif
 
 
-
-" make sure this part is only sourced when on WSL
+"--------------- make sure this part is only sourced when on WSL ----------------
 if g:twvim_wsl != 1
   call TwDebug("Not running in WSL, so specific functions sourced.")
   finish

@@ -1,4 +1,9 @@
 Before (set globals: handler config):
+  let g:twvim_debug = 1
+  "let g:os = 'Linux'
+  "let g:twvim_wsl = 1
+  "let g:twvim_mock = 1  "1: avoid execution of handler
+
   let g:twvim_handlers = {
         \ 'qnr': {'prefix': 'smb://uh01500696.bmwgroup.net/home\$', 'replacement': '/Volumes/Q187392'},
         \ 'yyy': {'prefix': 'smb://yyy', 'replacement': '/Volumes/yyy'},

@@ -1,3 +1,6 @@
+################################################################################
+################################ Tests for WSL #################################
+################################################################################
 Before (set globals: handler config):
   let g:twvim_handlers = {
         \ 'qnr': {'prefix': 'smb://uh01500696.bmwgroup.net/home\$', 'replacement': '/Volumes/xxx', 'executable': 'explorer.exe'},
@@ -9,6 +12,7 @@ Before (set globals: handler config):
 
   "Set Linux WLS environment
   let g:os = 'Linux'
+  let g:twvim_debug = 1
   let g:twvim_wsl = 1
   let g:twvim_mock = 1  "1: avoid execution of handler
   source ~/.vim/bundle/vimwiki-nirvana/plugin/functions_linux.vim
@@ -40,17 +44,17 @@ Before (set globals: handler config):
   "Assert ! TwWslHandler(file), "Valid drive, but expected invalid drive."
 
 "-------------------------------- HTTP handling ---------------------------------
-"Execute (test TwWslHandler: https):
-  "let g:twvim_mock = 0  "1: avoid execution of handler
-  "let link = "https://learnvimscriptthehardway.stevelosh.com/chapters/01.html"
-  "Log printf("mock: %s, file: %s", g:twvim_mock, link)
-  "let retcode = TwWslHandler(link)
-  "echom "retcode:" retcode
-  "Assert retcode, "Expect 1, got ".retcode
-
-Execute (test TwWslHandler: http):
-  let link = "http://learnvimscriptthehardway.stevelosh.com/chapters/02.html"
+Execute (test TwWslHandler: https):
+  let g:twvim_mock = 0  "1: avoid execution of handler
+  let link = "https://learnvimscriptthehardway.stevelosh.com/chapters/01.html"
   Log printf("mock: %s, file: %s", g:twvim_mock, link)
   let retcode = TwWslHandler(link)
   echom "retcode:" retcode
   Assert retcode, "Expect 1, got ".retcode
+
+"Execute (test TwWslHandler: http):
+  "let link = "http://learnvimscriptthehardway.stevelosh.com/chapters/02.html"
+  "Log printf("mock: %s, file: %s", g:twvim_mock, link)
+  "let retcode = TwWslHandler(link)
+  "echom "retcode:" retcode
+  "Assert retcode, "Expect 1, got ".retcode

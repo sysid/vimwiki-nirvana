@@ -1,4 +1,9 @@
 # Test my functions
+Before (Set globals):
+  let g:twvim_debug = 1
+  "let g:twvim_wsl = 1
+  let g:twvim_mock = 1  "1: avoid execution of handler
+
 "Execute (VimwikiLinkHandler: valid WSL ling):
   "let file = 'file:/mnt/c/Users/Thomas/OneDrive/My Documents/xxx.docx'
   "Log file
