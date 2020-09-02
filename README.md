@@ -1,26 +1,15 @@
-*vimwiki-nirvana* extension of vimwiki to make it note-taking nivrana
-       _                   _ _    _           _                              ~
-__   _(_)_ __ _____      _(_) | _(_)    _ __ (_)_ ____   ____ _ _ __   __ _  ~
-\ \ / / | '_ ` _ \ \ /\ / / | |/ / |___| '_ \| | '__\ \ / / _` | '_ \ / _` | ~
- \ V /| | | | | | \ V  V /| |   <| |___| | | | | |   \ V / (_| | | | | (_| | ~
-  \_/ |_|_| |_| |_|\_/\_/ |_|_|\_\_|   |_| |_|_|_|    \_/ \__,_|_| |_|\__,_| ~
+# vimwiki-nirvana
 
-==============================================================================
-CONTENTS                                            *vimwiki-nirvana-contents*
+Vimwiki-nirvana extends Vimwiki functionality by providing a custom handler for links. This handler implements:
 
-    1. Intro ................ |vimwiki-nirvana-intro|
-    2. WSL Support .......... |vimwiki-nirvana-wsl|
-    3. Link Translation ..... |vimwiki-nirvana-link-translation|
-    4. VIM Integration ...... |vimwiki-nirvana-vim-integration
-    5. License .............. |vimwiki-nirvana-license|
-
-==============================================================================
-INTRO                                                 *vimwiki-nirvana-intro*
+1. Windows Subsystem for Linux (WSL) support for [vimwiki](https://github.com/vimwiki/vimwiki).
+2. Link translation capabilities
+3. Custom application configuration
 
 This plugin requires https://github.com/xolox/vim-misc in order to establish
 OS detection. It is tested on Linux, Mac and WSL.
 
-General idea:
+## General idea:
 Vimwiki handles OS native paths very well. However the default behaviour of
 using the OS default program launcher fails on Windows Subsystem for Linux.
 
@@ -35,62 +24,55 @@ the path and feeds it to the specified application. If no application
 is specified, the default launchers (`open, xdg-open`, `start`) are
 used.
 
-==============================================================================
-WSL SUPPORT                                              *vimwiki-nirvana-wsl*
-
-
-WSL support:
+## Features
+### WSL support:
 No configuration required for normal HTTP links: When
-*vimwiki-nirvana* detects WSL, it automatically sets `explorer.exe` as your
+*vimwiki-nirvana* detects WLS, it automatically sets `explorer.exe` as your
 default program launcher for schema `http, https` and `file:/mnt/c`. To this
 end *vimwiki-nirvana* changes the path `file:/mnt/<drive_letter>/a/b/` to
 `<DRIVE_LETTER>:\a\b`. This allows `explorer.exe` to open the path with the registered Windows application.
 For convenience Windows links like `C:\path` are allowed,
 e.g. `file:C:\tmp`.
 
-==============================================================================
-LINK TRANSLATION                            *vimwiki-nirvana-link-translation*
+### Link Translation
 
 A path 'prefix' will be replaced by a 'replacement'. The
 resulting path will be fed to the specified executable to open the file.
 If no executable is given, the defaults are used (open, xdg-open, start).
 
 Configuration in `.vimrc`:
+```vi
 let g:twvim_handlers = {
       \ 'custom_schema': {'prefix': 'smb://a', 'replacement': '/Volume', 'executable': 'program for opening the file'},
 \ }
+```
 
 Resulting Translation:
 `custom_schema::smb://a/b/file.txt` -> `/Volume/b/file.txt`
 
 Example:
+```vi
 let g:twvim_handlers = {
       \ 'home': {'prefix': 'smb://uh01500696.bmwgroup.net/home\$', 'replacement': '/Volumes/xxx'},
       \ 'win_d': {'prefix': '/mnt/d', 'replacement': 'D:', 'executable': 'explorer.exe'},
 \ }
+```
 
 Caution:
 - Special characters in the prefix (e.g. $) have to be escaped.
 - the executable has to be in your search PATH
 
-==============================================================================
-VIM INTEGRATION                               *vimwiki-nirvana-vim-integration*
+### Vim Integration
 
 A dedicated schema to open files with VIM in a new tab is available:
 `vim::~/development/xxx.py`.
 
 Use the following config in `.vimrc`:
 
+```vi
 let g:twvim_handlers = {
       \ 'vim': {'prefix': '', 'replacement': '', 'executable': 'vim'},
 \ }
+```
 
 You can use path translation, i.e. specify `prefix, replacement` if needed.
-
-
-LICENSE                                              *vimwiki-nirvana-license*
-==============================================================================
-GNU GENERAL PUBLIC LICENSE
-
-==============================================================================
-vim:tw=78:sw=2:ts=2:ft=help:norl:nowrap:
