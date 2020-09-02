@@ -44,7 +44,7 @@ No configuration required for normal HTTP links: When
 *vimwiki-nirvana* detects WLS, it automatically sets `explorer.exe` as your
 default program launcher for schema `http, https` and `file:/mnt/c`. To this
 end *vimwiki-nirvana* changes the path `file:/mnt/<drive_letter>/a/b/` to
-`<drive_letter>:/a/b`. This allows `explorer.exe` to open the path with the registered Windows application.
+`<DRIVE_LETTER>:\a\b`. This allows `explorer.exe` to open the path with the registered Windows application.
 For convenience Windows links like `C:\path` are allowed,
 e.g. `file:C:\tmp`.
 

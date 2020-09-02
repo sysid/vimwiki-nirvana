@@ -22,7 +22,7 @@ function! TwWslHandler(link)  "{{{ use not default handler like sdg-open, but sp
   if link =~? "^http[s]*://.*"
       let cmd = "!explorer.exe ".link
       call TwDebug(printf('TwWslHandler: %s', cmd))
-      if !g:twvim_mock | silent execute cmd | endif
+      if !g:twvim_mock | silent execute cmd | execute 'redraw!' | endif
       return 1
 
     "handle: /mnt/c/...
@@ -39,7 +39,7 @@ function! TwWslHandler(link)  "{{{ use not default handler like sdg-open, but sp
       "let cmd = printf("!explorer.exe '%s'", nlink)
       let cmd = printf("!explorer.exe '%s'", substitute(nlink, "/", "\\\\", 'g'))
       call TwDebug(printf('TwWslHandler: %s', cmd))
-      if !g:twvim_mock | silent execute cmd | endif
+      if !g:twvim_mock | silent execute cmd | execute 'redraw!' | endif
       return 1
 
     "handle: C:\...
@@ -51,7 +51,7 @@ function! TwWslHandler(link)  "{{{ use not default handler like sdg-open, but sp
       let nlink = substitute(link, '^file:', '', "")
       let cmd = printf("!explorer.exe '%s'", nlink)
       call TwDebug(printf('TwWslHandler: %s', cmd))
-      if !g:twvim_mock | silent execute cmd | endif
+      if !g:twvim_mock | silent execute cmd | execute 'redraw!' | endif
       return 1
 
     else

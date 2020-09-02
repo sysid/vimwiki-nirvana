@@ -31,7 +31,7 @@ function! VimwikiLinkHandler(link)  "{{{ Use Vim to open links with special sche
 
   " if WSL standard html links require windows explorer
   if g:twvim_wsl
-    call TwLog("VimwikiLinkHandler: Calling WSL Handler.")
+    call TwDebug("VimwikiLinkHandler: Calling WSL Handler.")
     return TwWslHandler(link)
   endif
 
