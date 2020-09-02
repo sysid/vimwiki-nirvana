@@ -28,23 +28,23 @@ Before (set globals: handler config):
   "Log file
   "Assert TwHandler(file) == 0
 
-"Execute (TwHandler: Replacement impossible:  "xxx::smb://xxx/aaa/learnvimscriptthehardway.stevelosh.com/"):
+"Execute (TwHandler: Replacement impossible:  'xxx::smb://xxx/aaa/learnvimscriptthehardway.stevelosh.com/'):
   "let file = "xxx::smb://xxx/_/learnvimscriptthehardway.stevelosh.com/"
   "Assert TwHandler(file) == 2
 
 "----------------------------- Must only run on WSL -----------------------------
-"Execute (FIXME TwHandler:  "wsl::/mnt/d/xxx.docx"):
-  "let file = "wsl::/mnt/d/xxx.docx"
-  "Assert TwHandler(file)
+Execute (TwHandler:  'wsl::/mnt/d/xxx.docx'):
+  let file = "wsl::/mnt/d/xxx.docx"
+  Assert TwHandler(file)
 
 "------------------------- Must only run when SMB is mounted -------------------------
-"Execute (TwHandler: special characters:  "qnr::smb://uh01500696.bmwgroup.net/home$"):
+"Execute (TwHandler: special characters:  'qnr::smb://uh01500696.bmwgroup.net/home$'):
   "let file = "qnr::smb://uh01500696.bmwgroup.net/home$"
   "Assert TwHandler(file)
 
-Execute (TwHandler: "sfm1::smb://Europe.bmw.corp/WINFS/AD-Data/Internal/01 Strategy & Steering/03 Planning & Steering/06 Digitalisation/10_Projekte"):
-  let file = "sfm1::smb://Europe.bmw.corp/WINFS/AD-Data/Internal/01 Strategy & Steering/03 Planning & Steering/06 Digitalisation/10_Projekte"
-  Assert TwHandler(file)
+"Execute (TwHandler: 'sfm1::smb://Europe.bmw.corp/WINFS/AD-Data/Internal/01 Strategy & Steering/03 Planning & Steering/06 Digitalisation/10_Projekte'):
+  "let file = "sfm1::smb://Europe.bmw.corp/WINFS/AD-Data/Internal/01 Strategy & Steering/03 Planning & Steering/06 Digitalisation/10_Projekte"
+  "Assert TwHandler(file)
 
 ################################################################################
 ############################### TwExtractSchema ################################

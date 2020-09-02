@@ -18,22 +18,31 @@ if exists('TwWslHandler') | finish | endif  " avoid test error
 function! TwWslHandler(link)  "{{{ use not default handler like sdg-open, but specific one
   let link = a:link
 
-  "if link =~? "^http[s]\?:\/\/.*"
+  "handle: https://...
   if link =~? "^http[s]*://.*"
       let cmd = "!explorer.exe ".link
       call TwDebug(printf('TwWslHandler: %s', cmd))
-      "silent execute cmd
+      if !g:twvim_mock | silent execute cmd | endif
       return 1
+
+    "handle: /mnt/c/...
     elseif link =~? "^file:/mnt/./.*"
       let drive = matchstr(link, '^file:/mnt/\zs.\ze/.*')
       call TwDebug(printf("TwWslHandler: drive: %s", drive))
       if drive == "" | return 0 | endif  "fall through to default handler
 
       let nlink = substitute(link, '^file:/mnt/./', drive.':/', "")
-      "let cmd = "!explorer.exe '" . substitute(nlink, "/", "\\\\", 'g') ."'"
-      let cmd = printf("!explorer.exe '%s'", nlink)
+
+      "Gotcha:
+      "opens with Word: explorer.exe 'c:\Users\Thomas\OneDrive\My Documents\vimwiki\xxx.docx'
+      "opens with Explorer: explorer.exe 'c:/Users/Thomas/OneDrive/My Documents/vimwiki/xxx.docx'
+      "let cmd = printf("!explorer.exe '%s'", nlink)
+      let cmd = printf("!explorer.exe '%s'", substitute(nlink, "/", "\\\\", 'g'))
       call TwDebug(printf('TwWslHandler: %s', cmd))
+      if !g:twvim_mock | silent execute cmd | endif
       return 1
+
+    "handle: C:\...
     elseif link =~? "^file:.:.*"
       let drive = matchstr(link, '^file:\zs.\ze:.*')
       call TwDebug(printf("TwWslHandler: drive: %s", drive))
@@ -42,10 +51,13 @@ function! TwWslHandler(link)  "{{{ use not default handler like sdg-open, but sp
       let nlink = substitute(link, '^file:', '', "")
       let cmd = printf("!explorer.exe '%s'", nlink)
       call TwDebug(printf('TwWslHandler: %s', cmd))
+      if !g:twvim_mock | silent execute cmd | endif
       return 1
+
     else
       echom printf("-M- TwWslHandler: %s is no WEB link and no Windows-drive link, passing through.", link)
       return 0
+
   endif
 endfunction
 "let s:link = "https://learnvimscriptthehardway.stevelosh.com/"
