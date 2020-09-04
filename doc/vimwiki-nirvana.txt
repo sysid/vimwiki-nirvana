@@ -11,7 +11,7 @@ CONTENTS                                            *vimwiki-nirvana-contents*
     1. Intro ................ |vimwiki-nirvana-intro|
     2. WSL Support .......... |vimwiki-nirvana-wsl|
     3. Link Translation ..... |vimwiki-nirvana-link-translation|
-    4. VIM Integration ...... |vimwiki-nirvana-vim-integration
+    4. VIM Integration ...... |vimwiki-nirvana-vim-integration|
     5. License .............. |vimwiki-nirvana-license|
 
 ==============================================================================
