@@ -40,8 +40,9 @@ WSL SUPPORT                                              *vimwiki-nirvana-wsl*
 
 
 WSL support:
-No configuration required for normal HTTP links: When
-*vimwiki-nirvana* detects WSL, it automatically sets `explorer.exe` as your
+No configuration required for HTTP links.
+
+When *vimwiki-nirvana* detects WSL, it automatically sets `explorer.exe` as your
 default program launcher for schema `http, https` and `file:/mnt/c`. To this
 end *vimwiki-nirvana* changes the path `file:/mnt/<drive_letter>/a/b/` to
 `<DRIVE_LETTER>:\a\b`. This allows `explorer.exe` to open the path with the registered Windows application.
@@ -52,7 +53,7 @@ e.g. `file:C:\tmp`.
 LINK TRANSLATION                            *vimwiki-nirvana-link-translation*
 
 A path 'prefix' will be replaced by a 'replacement'. The
-resulting path will be fed to the specified executable to open the file.
+resulting path will be passed to the specified executable to open the file.
 If no executable is given, the defaults are used (open, xdg-open, start).
 
 Configuration in `.vimrc`:
@@ -70,13 +71,17 @@ let g:twvim_handlers = {
 \ }
 
 Caution:
-- Special characters in the prefix (e.g. $) have to be escaped.
+- Special characters in your path prefix (e.g. $) have to be escaped.
 - the executable has to be in your search PATH
 
 ==============================================================================
 VIM INTEGRATION                               *vimwiki-nirvana-vim-integration*
 
-A dedicated schema to open files with VIM in a new tab is available:
+Vimwiki opens its text files by just clicking the link. It would be nice, if this
+feature also applies to arbitrary text files so that they are being opened in a
+new tab.
+
+A dedicated schema makes this possible:
 `vim::~/development/xxx.py`.
 
 Use the following config in `.vimrc`:

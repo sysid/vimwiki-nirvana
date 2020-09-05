@@ -9,25 +9,31 @@ Vimwiki-nirvana extends Vimwiki functionality by providing a custom handler for 
 This plugin requires https://github.com/xolox/vim-misc in order to establish
 OS detection. It is tested on Linux, Mac and WSL.
 
+## Installation
+Install it with your favorite plugin manager, e.g. [Pathogen](https://github.com/tpope/vim-pathogen).
+
 ## General idea:
-Vimwiki handles OS native paths very well. However the default behaviour of
-using the OS default program launcher fails on Windows Subsystem for Linux.
+Vimwiki handles OS native paths very well. However the default behaviour 
+fails on Windows Subsystem for Linux.
 
 This plugin extends Vimwiki so that WSL works.
 
-Additionally it allows to translate paths and to specifiy applications
-in case the default behaviour is not what is needed. Instead of using
-the default `file:/path` schema custom schemes are supported:
+Additionally it allows to translate paths and to specifiy custom applications
+in case the default behaviour is not what you need. 
+
+Instead of using the default `file:/path` schema custom schemes are supported:
 `custom_schema::/path`
+
 Custom schemes call the *vimwiki-nirvana* handler which translates
-the path and feeds it to the specified application. If no application
+the path and calls the specified application. If no application
 is specified, the default launchers (`open, xdg-open`, `start`) are
 used.
 
 ## Features
 ### WSL support:
-No configuration required for normal HTTP links: When
-*vimwiki-nirvana* detects WLS, it automatically sets `explorer.exe` as your
+No configuration required for HTTP links.
+
+When *vimwiki-nirvana* detects WLS, it automatically sets `explorer.exe` as your
 default program launcher for schema `http, https` and `file:/mnt/c`. To this
 end *vimwiki-nirvana* changes the path `file:/mnt/<drive_letter>/a/b/` to
 `<DRIVE_LETTER>:\a\b`. This allows `explorer.exe` to open the path with the registered Windows application.
@@ -59,12 +65,16 @@ let g:twvim_handlers = {
 ```
 
 Caution:
-- Special characters in the prefix (e.g. $) have to be escaped.
-- the executable has to be in your search PATH
+- Special characters in your path prefix (e.g. $) have to be escaped.
+- the executable has to be in your search PATH or you need to specify the full path
 
 ### Vim Integration
 
-A dedicated schema to open files with VIM in a new tab is available:
+Vimwiki opens its text files by just clicking the link. It would be nice, if this
+feature also applies to arbitrary text files so that they are being opened in a
+new tab.
+
+A dedicated schema makes this possible:
 `vim::~/development/xxx.py`.
 
 Use the following config in `.vimrc`:
