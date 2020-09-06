@@ -89,8 +89,12 @@ Use the following config in `.vimrc`:
 let g:twvim_handlers = {
       \ 'vim': {'prefix': '', 'replacement': '', 'executable': 'vim'},
 \ }
+You can use path translation, of course. I.e. specify `prefix, replacement` if needed.
 
-You can use path translation, i.e. specify `prefix, replacement` if needed.
+To open now a text-file as new tab in your vimwiki-session you can a link of
+the form:
+`vim::$HOME/.vim/bundle/vimwiki-nirvana/LICENSE`
+
 
 
 LICENSE                                              *vimwiki-nirvana-license*
