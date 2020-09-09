@@ -1,5 +1,7 @@
 # vimwiki-nirvana
 
+Background information: https://sysid.github.io/vimwiki/
+
 Vimwiki-nirvana extends Vimwiki functionality by providing a custom handler for links. This handler implements:
 
 1. Windows Subsystem for Linux (WSL) support for [vimwiki](https://github.com/vimwiki/vimwiki).
