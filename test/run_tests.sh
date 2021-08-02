@@ -9,12 +9,12 @@ fi
 
 vim -Nu <(cat << EOF
 filetype off
-set rtp+=~/.vim/bundle/vader.vim
-set rtp+=~/.vim/bundle/vim-markdown
-set rtp+=~/.vim/bundle/vim-markdown/after
-set rtp+=~/.vim/bundle/vim-misc
-set rtp+=~/.vim/bundle/tw-vim
-set rtp+=~/.vim/bundle/vimwiki-nirvana
+set rtp+=~/.vim/plugged/vader.vim
+set rtp+=~/.vim/plugged/vim-markdown
+set rtp+=~/.vim/plugged/vim-markdown/after
+set rtp+=~/.vim/plugged/vim-misc
+set rtp+=~/.vim/plugged/tw-vim
+set rtp+=~/.vim/plugged/vimwiki-nirvana
 filetype plugin indent on
 syntax enable
 
