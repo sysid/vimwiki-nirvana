@@ -12,6 +12,7 @@ function! TwIsLinkValid(FileName)  "{{{ This function returns true if the FileNa
   else
       "echom '-E- invalid link:' Filename
       return 0
+  endif
 endfunction
 "let file = '/Volumes/AD-Data/Internal/01 Strategy & Steering/03 Planning & Steering/06 Digitalisation/10_Projekte/PublicCharging/'
 "command! TwIsLinkValid :echo TwIsLinkValid(file)
